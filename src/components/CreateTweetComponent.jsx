@@ -15,12 +15,13 @@ const CreateTweetComponent = ({ tweets }) => {
 export default CreateTweetComponent
 
 
-const PrincipalContainer = styled.div`
+export const PrincipalContainer = styled.div`
 
-    width: 600px;
+    width: 100%;
     height: 500px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     margin-top: 5px;
     position: relative;

@@ -28,7 +28,7 @@ export default TweetListComponent;
 
 const TweetListContainer = styled.div`
   border: 1px solid white;
-  width: 100%;
+  width: 600px;
   height: 200px;
   border: none;
 `;

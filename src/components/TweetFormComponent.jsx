@@ -28,8 +28,10 @@ const TweetFormComponent = ({ tweets }) => {
 
     const date = new Date().toISOString();
 
+    const userName = await localforage.getItem("userName");
+
     const newTweet = {
-      userName: "default user",
+      userName,
       date,
       content: e.target.tweet.value,
     };
@@ -91,7 +93,7 @@ export default TweetFormComponent;
 
 const TweetFormComponentcontainer = styled.div`
   border: 1px solid white;
-  width: 100%;
+  width: 600px;
   height: 200px;
   position: relative;
   padding: 15px 12px;
