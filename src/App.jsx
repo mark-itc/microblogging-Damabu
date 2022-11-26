@@ -1,24 +1,26 @@
-import localforage from "localforage";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import "./App.css";
 import CreateTweetComponent from "./components/CreateTweetComponent";
 
 function App() {
   const [tweets, setTweets] = useState([]);
 
+  const dataTweets = async () => {
+    const res = await axios.get(
+      "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet"
+    );
+
+    setTweets(res.data.tweets);
+  };
+
   const tweetMethods = {
     tweets,
     setTweets,
+    dataTweets,
   };
 
   useEffect(() => {
-    localforage.getItem("tweets").then((res) => {
-      if (res == null) {
-        localforage.setItem("tweets", tweets);
-      } else {
-        setTweets(res);
-      }
-    });
+    dataTweets();
   }, []);
 
   return (

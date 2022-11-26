@@ -1,37 +1,56 @@
+import axios from "axios";
 import localforage from "localforage";
 import React, { useState } from "react";
 import styled from "styled-components";
+import Loader from "../animation/Loader";
 
 const TweetFormComponent = ({ tweets }) => {
   const [tweet, setTweet] = useState("");
   const [characterlimit, setCharacterlimit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isErrServer, setIsErrServer] = useState(false);
 
   const checkCharacters = (e) => {
     setTweet(e.target.value);
 
     if (e.target.value.length >= 140) {
       setCharacterlimit(true);
+      setIsErrServer(false);
     } else {
       setCharacterlimit(false);
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(!isLoading);
+
+    const date = new Date().toISOString();
+
     const newTweet = {
-      id: tweets.tweets.length, 
-      user: "default user",
-      date: "default date",
-      tweet: e.target.tweet.value,
+      userName: "default user",
+      date,
+      content: e.target.tweet.value,
     };
 
-    const newTweets = [...tweets.tweets, newTweet];
-    tweets.setTweets(newTweets);
-    localforage.setItem("tweets", newTweets);
-    setTweet("")
+    setTimeout(async () => {
+      try {
+        const res = await axios.post(
+          "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet",
+          newTweet
+        );
+        tweets.dataTweets();
+        setIsLoading(false);
+        setTweet("");
+      } catch (error) {
+        setIsLoading(false);
+        setIsErrServer(!isErrServer);
+        console.log(error.response.data.message);
+      }
+    }, 2000);
   };
-  
+
   return (
     <TweetFormComponentcontainer>
       <TweetForm onSubmit={onSubmit}>
@@ -45,12 +64,23 @@ const TweetFormComponent = ({ tweets }) => {
           placeholder="What you have in mind..."
         ></textarea>
         <div>
-          {characterlimit && (
-            <Messagecharacterlimit>
-              The tweet can't contain more then 140 chars.
-            </Messagecharacterlimit>
+          {isErrServer && (
+            <MessageError>
+              content should NOT be shorter than 1 characters
+            </MessageError>
           )}
-          <TweetButton isEnabled={characterlimit}>Tweet</TweetButton>
+          {characterlimit && (
+            <MessageError>
+              The tweet can't contain more then 140 chars.
+            </MessageError>
+          )}
+
+          <TweetButton
+            disabled={isLoading ? true : false}
+            isEnabled={characterlimit}
+          >
+            {isLoading ? <Loader /> : "Tweet"}{" "}
+          </TweetButton>
         </div>
       </TweetForm>
     </TweetFormComponentcontainer>
@@ -73,7 +103,7 @@ const TweetForm = styled.form`
   flex-direction: column;
 
   textarea {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     width: 100%;
     height: 100px;
     background-color: transparent;
@@ -89,7 +119,7 @@ const TweetForm = styled.form`
 `;
 
 const TweetButton = styled.button`
-line-height: 19px;
+  line-height: 19px;
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -101,13 +131,15 @@ line-height: 19px;
   cursor: pointer;
   font-weight: 600;
   pointer-events: ${(props) => (props.isEnabled ? "none" : "visible")};
+  width: 68px;
+  height: 34px;
 
   &:hover {
     background-color: #007bffbe;
   }
 `;
 
-const Messagecharacterlimit = styled.div`
+const MessageError = styled.div`
   background-color: #f8d7da;
   color: #721c24;
   padding: 6px 12px;
