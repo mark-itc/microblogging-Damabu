@@ -1,7 +1,7 @@
 import React from 'react'
 import Lottie from 'lottie-react'
 import styled from 'styled-components'
-import Loading from '../assets/loader.json'
+import Loading from '../../src/assets/loader.json'
 
 const Loader = () => {
   return (
