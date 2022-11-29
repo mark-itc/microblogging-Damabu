@@ -1,17 +1,24 @@
 import styled from "styled-components";
 
 const size = {
-  mobile: "425px",
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "425px",
   tablet: "768px",
   laptop: "1024px",
+  laptopL: "1440px",
   desktop: "2560px",
 };
 
-const device = {
-  mobile: `(min-width: ${size.mobile})`,
+export const device = {
+  mobileS: `(min-width: ${size.mobileS})`,
+  mobileM: `(min-width: ${size.mobileM})`,
+  mobileL: `(min-width: ${size.mobileL})`,
   tablet: `(min-width: ${size.tablet})`,
   laptop: `(min-width: ${size.laptop})`,
+  laptopL: `(min-width: ${size.laptopL})`,
   desktop: `(min-width: ${size.desktop})`,
+  desktopL: `(min-width: ${size.desktop})`,
 };
 
 export const PrincipalContainer = styled.div`
@@ -23,22 +30,6 @@ export const PrincipalContainer = styled.div`
   gap: 20px;
   margin-top: 5px;
   position: relative;
-
-  @media ${device.mobile} {
-    max-width: 300px;
-  }
-
-  @media ${device.tablet} {
-    max-width: 500px;
-  }
-
-  @media ${device.laptop} {
-    max-width: 100%;
-  }
-
-  @media ${device.desktop} {
-    max-width: 100%;
-  }
 `;
 
 export const NavBar = styled.div`
@@ -49,6 +40,37 @@ export const NavBar = styled.div`
   display: flex;
   align-items: center;
   padding-left: 36px;
+
+  @media ${device.mobileS} {
+    max-width: 310px;
+  }
+
+  @media ${device.mobileM} {
+    max-width: 360px;
+  }
+
+  @media ${device.mobileL} {
+    max-width: 410px;
+  }
+
+  @media ${device.tablet} {
+    max-width: 750px;
+  }
+  @media ${device.laptop} {
+    max-width: 100%;
+  }
+
+  @media ${device.laptopL} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktop} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktopL} {
+    max-width: 100%;
+  }
 
   ul {
     display: flex;
@@ -73,25 +95,37 @@ export const TweetFormComponentcontainer = styled.div`
   border: 1px solid white;
   width: 600px;
   height: 200px;
-  position: relative;
   padding: 15px 12px;
   border-radius: 6px;
 
-  @media ${device.mobile} {
-    max-width: 200px;
-    justify-content: center;
+  @media ${device.mobileS} {
+    max-width: 310px;
+  }
+
+  @media ${device.mobileM} {
+    max-width: 360px;
+  }
+
+  @media ${device.mobileL} {
+    max-width: 410px;
   }
 
   @media ${device.tablet} {
-    justify-content: center;
-    max-width: 400px;
+    max-width: 750px;
   }
-
   @media ${device.laptop} {
     max-width: 100%;
   }
 
+  @media ${device.laptopL} {
+    max-width: 100%;
+  }
+
   @media ${device.desktop} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktopL} {
     max-width: 100%;
   }
 `;
@@ -99,6 +133,7 @@ export const TweetFormComponentcontainer = styled.div`
 export const TweetForm = styled.form`
   display: flex;
   flex-direction: column;
+  height: 100%;
 
   textarea {
     font-family: "Roboto", sans-serif;
@@ -111,32 +146,48 @@ export const TweetForm = styled.form`
     resize: none;
   }
 
-  div {
+  .form-bottom {
     display: flex;
-  }
+    justify-content: space-between;
+    align-items: end;
+    height: 70px;
 
-  @media ${device.mobile} {
-    max-width: 200px;
-    justify-content: center;
-  }
+    @media ${device.mobileS} {
+      flex-direction: column;
+    }
 
-  @media ${device.tablet} {
-    justify-content: center;
-    max-width: 400px;
-  }
+    @media ${device.mobileM} {
+      flex-direction: column;
+    }
 
-  @media ${device.laptop} {
-    max-width: 100%;
-  }
+    @media ${device.mobileL} {
+      flex-direction: column;
+    }
 
-  @media ${device.desktop} {
-    max-width: 100%;
+    @media ${device.tablet} {
+      flex-direction: row;
+    }
+
+    @media ${device.laptop} {
+      flex-direction: row;
+    }
+
+    @media ${device.laptopL} {
+      flex-direction: row;
+    }
+
+    @media ${device.desktop} {
+      flex-direction: row;
+    }
+
+    @media ${device.desktopL} {
+      flex-direction: row;
+    }
   }
 `;
 
 export const TweetButton = styled.button`
   line-height: 19px;
-  position: absolute;
   bottom: 10px;
   right: 10px;
   padding: 6px 12px;
@@ -150,6 +201,38 @@ export const TweetButton = styled.button`
   width: 68px;
   height: 34px;
 
+  @media ${device.mobileS} {
+    min-width: 100%;
+  }
+
+  @media ${device.mobileM} {
+    min-width: 100%;
+  }
+
+  @media ${device.mobileL} {
+    min-width: 100%;
+  }
+
+  @media ${device.tablet} {
+    min-width: 68px;
+  }
+
+  @media ${device.laptop} {
+    min-width: 68px;
+  }
+
+  @media ${device.laptopL} {
+    min-width: 68px;
+  }
+
+  @media ${device.desktop} {
+    min-width: 68px;
+  }
+
+  @media ${device.desktopL} {
+    min-width: 68px;
+  }
+
   &:hover {
     background-color: #007bffbe;
   }
@@ -160,8 +243,6 @@ export const MessageError = styled.div`
   color: #721c24;
   padding: 6px 12px;
   border-radius: 4px;
-  position: absolute;
-  bottom: 10px;
 `;
 
 export const TweetListContainer = styled.div`
@@ -169,6 +250,41 @@ export const TweetListContainer = styled.div`
   width: 600px;
   height: 200px;
   border: none;
+
+  @media ${device.mobileS} {
+    max-width: 310px;
+    justify-content: center;
+  }
+
+  @media ${device.mobileM} {
+    justify-content: center;
+    max-width: 360px;
+  }
+
+  @media ${device.mobileL} {
+    max-width: 410px;
+  }
+
+  @media ${device.tablet} {
+    max-width: 750px;
+  }
+  @media ${device.laptop} {
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  @media ${device.laptopL} {
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  @media ${device.desktop} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktopL} {
+    max-width: 100%;
+  }
 `;
 
 export const TweetList = styled.div`
@@ -209,6 +325,37 @@ export const UserContainer = styled.div`
   border: none;
   position: relative;
   margin-top: 50px;
+
+  @media ${device.mobileS} {
+    max-width: 310px;
+  }
+
+  @media ${device.mobileM} {
+    max-width: 360px;
+  }
+
+  @media ${device.mobileL} {
+    max-width: 410px;
+  }
+
+  @media ${device.tablet} {
+    max-width: 750px;
+  }
+  @media ${device.laptop} {
+    max-width: 100%;
+  }
+
+  @media ${device.laptopL} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktop} {
+    max-width: 100%;
+  }
+
+  @media ${device.desktopL} {
+    max-width: 100%;
+  }
 
   h1 {
     color: white;
@@ -252,6 +399,38 @@ export const SaveButton = styled.button`
   pointer-events: ${(props) => (props.isEnabled ? "none" : "visible")};
   width: 68px;
   height: 34px;
+
+  @media ${device.mobileS} {
+    min-width: 100%;
+  }
+
+  @media ${device.mobileM} {
+    min-width: 100%;
+  }
+
+  @media ${device.mobileL} {
+    min-width: 100%;
+  }
+
+  @media ${device.tablet} {
+    min-width: 68px;
+  }
+
+  @media ${device.laptop} {
+    min-width: 68px;
+  }
+
+  @media ${device.laptopL} {
+    min-width: 68px;
+  }
+
+  @media ${device.desktop} {
+    min-width: 68px;
+  }
+
+  @media ${device.desktopL} {
+    min-width: 68px;
+  }
 
   &:hover {
     background-color: #007bffbe;

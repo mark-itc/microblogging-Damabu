@@ -60,27 +60,30 @@ const TweetFormComponent = () => {
   return (
     <TweetFormComponentcontainer>
       <TweetForm onSubmit={onSubmit}>
-        <textarea
-          name="tweet"
-          id=""
-          cols="30"
-          rows="10"
-          value={tweet}
-          onChange={checkCharacters}
-          placeholder="What you have in mind..."
-        ></textarea>
         <div>
-          {isErrServer && (
-            <MessageError>
-              content should NOT be shorter than 1 characters
-            </MessageError>
-          )}
-          {characterlimit && (
-            <MessageError>
-              The tweet can't contain more then 140 chars.
-            </MessageError>
-          )}
-
+          <textarea
+            name="tweet"
+            id=""
+            cols="30"
+            rows="10"
+            value={tweet}
+            onChange={checkCharacters}
+            placeholder="What you have in mind..."
+          ></textarea>
+        </div>
+        <div className="form-bottom">
+          <div>
+            {isErrServer && (
+              <MessageError>
+                content should NOT be shorter than 1 characters
+              </MessageError>
+            )}
+            {characterlimit && (
+              <MessageError>
+                The tweet can't contain more then 140 chars.
+              </MessageError>
+            )}
+          </div>
           <TweetButton
             disabled={isLoading ? true : false}
             isEnabled={characterlimit}
