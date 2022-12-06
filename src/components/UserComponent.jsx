@@ -1,16 +1,16 @@
-import localforage from "localforage";
-import React, { useEffect, useState } from "react";
+import localforage from 'localforage';
+import React, { useEffect, useState } from 'react';
 import {
   PrincipalContainer,
   UserContainer,
   SaveButton,
-} from "./StyleComponent";
+} from './StyleComponent';
 
 const UserComponent = () => {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState('');
 
   const existUserName = async () => {
-    const userName = await localforage.getItem("userName");
+    const userName = await localforage.getItem('userName');
     if (userName) {
       setUserName(userName);
     }
@@ -19,7 +19,7 @@ const UserComponent = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    localforage.setItem("userName", userName);
+    localforage.setItem('userName', userName);
   };
 
   useEffect(() => {
@@ -32,9 +32,9 @@ const UserComponent = () => {
         <h1>Profile</h1>
         <form onSubmit={onSubmit}>
           <div>
-            <label htmlFor="">User Name</label>
+            <label htmlFor=''>User Name</label>
             <input
-              type="text"
+              type='text'
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
             />

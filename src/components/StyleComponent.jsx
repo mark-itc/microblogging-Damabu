@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const size = {
-  mobileS: "320px",
-  mobileM: "375px",
-  mobileL: "425px",
-  tablet: "768px",
-  laptop: "1024px",
-  laptopL: "1440px",
-  desktop: "2560px",
+  mobileS: '320px',
+  mobileM: '375px',
+  mobileL: '425px',
+  tablet: '768px',
+  laptop: '1024px',
+  laptopL: '1440px',
+  desktop: '2560px',
 };
 
 export const device = {
@@ -136,7 +136,7 @@ export const TweetForm = styled.form`
   height: 100%;
 
   textarea {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Roboto', sans-serif;
     width: 100%;
     height: 100px;
     background-color: transparent;
@@ -191,13 +191,13 @@ export const TweetButton = styled.button`
   bottom: 10px;
   right: 10px;
   padding: 6px 12px;
-  background-color: ${(props) => (props.isEnabled ? "#007bff9e " : "#007BFF ")};
-  color: ${(props) => (props.isEnabled ? "#ffffff96" : "white")};
+  background-color: ${(props) => (props.isEnabled ? '#007bff9e ' : '#007BFF ')};
+  color: ${(props) => (props.isEnabled ? '#ffffff96' : 'white')};
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  pointer-events: ${(props) => (props.isEnabled ? "none" : "visible")};
+  pointer-events: ${(props) => (props.isEnabled ? 'none' : 'visible')};
   width: 68px;
   height: 34px;
 
@@ -390,13 +390,13 @@ export const SaveButton = styled.button`
   bottom: 10px;
   right: 0;
   padding: 6px 12px;
-  background-color: ${(props) => (props.isEnabled ? "#007bff9e " : "#007BFF ")};
-  color: ${(props) => (props.isEnabled ? "#ffffff96" : "white")};
+  background-color: ${(props) => (props.isEnabled ? '#007bff9e ' : '#007BFF ')};
+  color: ${(props) => (props.isEnabled ? '#ffffff96' : 'white')};
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
-  pointer-events: ${(props) => (props.isEnabled ? "none" : "visible")};
+  pointer-events: ${(props) => (props.isEnabled ? 'none' : 'visible')};
   width: 68px;
   height: 34px;
 

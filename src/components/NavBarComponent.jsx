@@ -1,6 +1,6 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { NavBar } from "./StyleComponent";
+import React from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
+import { NavBar } from './StyleComponent';
 
 const NavBarComponent = () => {
   return (
@@ -9,14 +9,14 @@ const NavBarComponent = () => {
         <ul>
           <li>
             <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active" : "")}
+              to='/'
+              className={({ isActive }) => (isActive ? 'active' : '')}
             >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/user">User</NavLink>
+            <NavLink to='/user'>User</NavLink>
           </li>
         </ul>
       </NavBar>

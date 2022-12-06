@@ -1,19 +1,18 @@
-import axios from "axios";
-import localforage from "localforage";
-import React, { useContext, useState } from "react";
+import localforage from 'localforage';
+import React, { useContext, useState } from 'react';
+import Loader from '../animation/Loader';
+import { TweetsContext } from '../context/TweetsContext';
 import {
   TweetFormComponentcontainer,
   TweetForm,
   TweetButton,
   MessageError,
-} from "./StyleComponent";
-import Loader from "../animation/Loader";
-import { TweetsContext } from "../context/TweetsContext";
+} from './StyleComponent';
 
 const TweetFormComponent = () => {
   const { addTweet } = useContext(TweetsContext);
 
-  const [tweet, setTweet] = useState("");
+  const [tweet, setTweet] = useState('');
   const [characterlimit, setCharacterlimit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isErrServer, setIsErrServer] = useState(false);
@@ -36,7 +35,7 @@ const TweetFormComponent = () => {
 
     const date = new Date().toISOString();
 
-    const userName = await localforage.getItem("userName");
+    const userName = await localforage.getItem('userName');
 
     const newTweet = {
       userName,
@@ -48,7 +47,7 @@ const TweetFormComponent = () => {
       try {
         await addTweet(newTweet);
         setIsLoading(false);
-        setTweet("");
+        setTweet('');
       } catch (error) {
         setIsLoading(false);
         setIsErrServer(!isErrServer);
@@ -62,16 +61,16 @@ const TweetFormComponent = () => {
       <TweetForm onSubmit={onSubmit}>
         <div>
           <textarea
-            name="tweet"
-            id=""
-            cols="30"
-            rows="10"
+            name='tweet'
+            id=''
+            cols='30'
+            rows='10'
             value={tweet}
             onChange={checkCharacters}
-            placeholder="What you have in mind..."
+            placeholder='What you have in mind...'
           ></textarea>
         </div>
-        <div className="form-bottom">
+        <div className='form-bottom'>
           <div>
             {isErrServer && (
               <MessageError>
@@ -88,7 +87,7 @@ const TweetFormComponent = () => {
             disabled={isLoading ? true : false}
             isEnabled={characterlimit}
           >
-            {isLoading ? <Loader /> : "Tweet"}{" "}
+            {isLoading ? <Loader /> : 'Tweet'}{' '}
           </TweetButton>
         </div>
       </TweetForm>

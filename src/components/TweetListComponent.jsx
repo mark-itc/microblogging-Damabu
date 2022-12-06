@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { TweetsContext } from "../context/TweetsContext";
-import { TweetListContainer, TweetList, PostedTweet } from "./StyleComponent";
+import React, { useContext, useEffect, useState } from 'react';
+import { TweetsContext } from '../context/TweetsContext';
+import { TweetListContainer, TweetList, PostedTweet } from './StyleComponent';
 
 const TweetListComponent = () => {
   const { dataBaseTweetList } = useContext(TweetsContext);
