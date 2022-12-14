@@ -323,7 +323,6 @@ export const UserContainer = styled.div`
   width: 600px;
   height: 200px;
   border: none;
-  position: relative;
   margin-top: 50px;
 
   @media ${device.mobileS} {
@@ -386,9 +385,7 @@ export const UserContainer = styled.div`
 
 export const SaveButton = styled.button`
   line-height: 19px;
-  position: absolute;
   bottom: 10px;
-  right: 0;
   padding: 6px 12px;
   background-color: ${(props) => (props.isEnabled ? '#007bff9e ' : '#007BFF ')};
   color: ${(props) => (props.isEnabled ? '#ffffff96' : 'white')};

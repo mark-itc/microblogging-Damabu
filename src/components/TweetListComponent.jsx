@@ -1,22 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { TweetsContext } from '../context/TweetsContext';
+import { useEffect, useState } from 'react';
+import { allTweets } from '../firebase/config';
 import { TweetListContainer, TweetList, PostedTweet } from './StyleComponent';
 
 const TweetListComponent = () => {
-  const { dataBaseTweetList } = useContext(TweetsContext);
-
   const [tweetList, setTweetList] = useState([]);
 
-  const api = async () => {
-    const res = await dataBaseTweetList();
+  const getTweetList = async () => {
+    const res = await allTweets();
     setTweetList(res);
   };
 
   useEffect(() => {
-    api();
-    setInterval(() => {
-      api();
-    }, 5000);
+    getTweetList();
   }, []);
 
   return (
@@ -28,10 +23,10 @@ const TweetListComponent = () => {
             <TweetList key={index}>
               <PostedTweet>
                 <div>
-                  <p>{res.userName}</p>
+                  <p>{res.user}</p>
                   <p>{res.date}</p>
                 </div>
-                <p>{res.content}</p>
+                <p>{res.tweet}</p>
               </PostedTweet>
             </TweetList>
           );
