@@ -248,7 +248,6 @@ export const MessageError = styled.div`
 export const TweetListContainer = styled.div`
   border: 1px solid white;
   width: 600px;
-  height: 200px;
   border: none;
 
   @media ${device.mobileS} {
@@ -306,7 +305,22 @@ export const PostedTweet = styled.div`
   padding: 15px;
   flex-direction: column-reverse;
 
+  img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
+
   div {
+    display: flex;
+    align-items: center;
+  }
+
+  div img {
+    margin-right: 10px;
+  }
+
+  .topTweet {
     color: #6c757d;
     display: flex;
     justify-content: space-between;
@@ -324,6 +338,13 @@ export const UserContainer = styled.div`
   height: 200px;
   border: none;
   margin-top: 50px;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    justify-content: center;
+  }
 
   @media ${device.mobileS} {
     max-width: 310px;
@@ -379,6 +400,10 @@ export const UserContainer = styled.div`
       outline: none;
       padding: 0 10px;
       font-size: 16px;
+    }
+
+    .imgInput {
+      border: none;
     }
   }
 `;

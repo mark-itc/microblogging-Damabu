@@ -1,11 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-} from 'firebase/firestore/lite';
+import { getStorage, ref } from 'firebase/storage';
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAzOhqmkEvuBDsCDc1YAD_7IPy71KDNgN0',
@@ -18,15 +14,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 export const auth = getAuth(app);
-
-export const allTweets = async () => {
-  const tweets = collection(db, 'tweets');
-  const querySnapshot = await getDocs(tweets);
-  const result = querySnapshot.docs.map((doc) => doc.data());
-  return result;
-};
+export const storage = getStorage(app);
 
 export const addTweet = async (newTweet) => {
   const tweets = collection(db, 'tweets');

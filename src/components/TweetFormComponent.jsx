@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import localforage from 'localforage';
+import { useEffect, useState } from 'react';
 import Loader from '../animation/Loader';
-import { addTweet } from '../firebase/config';
+import { addTweet, auth, db } from '../firebase/config';
 import {
   TweetFormComponentcontainer,
   TweetForm,
@@ -12,6 +15,16 @@ const TweetFormComponent = () => {
   const [tweet, setTweet] = useState('');
   const [characterlimit, setCharacterlimit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [userUID, setUserUID] = useState('');
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUserUID(user.uid);
+      if (user === null) {
+        return navigate('/login');
+      }
+    });
+  }, []);
 
   const checkCharacters = (e) => {
     setTweet(e.target.value);
@@ -29,24 +42,29 @@ const TweetFormComponent = () => {
     setIsLoading(!isLoading);
 
     const date = new Date().toISOString();
+    const user = await localforage.getItem('userUID');
+
+    const userUID = await localforage.getItem('userUID');
+    const userRef = doc(db, 'users', userUID);
+    const imgUser = await getDoc(userRef);
 
     const newTweet = {
       user,
       date,
       tweet: e.target.tweet.value,
+      urlImg: imgUser.data().urlImg ? imgUser.data().urlImg : '',
     };
 
-    setTimeout(async () => {
+    const getTweet = async () => {
       try {
         await addTweet(newTweet);
         setIsLoading(false);
         setTweet('');
       } catch (error) {
         setIsLoading(false);
-        setIsErrServer(!isErrServer);
-        console.log(error.response.data.message);
       }
-    }, 2000);
+    };
+    getTweet();
   };
 
   return (

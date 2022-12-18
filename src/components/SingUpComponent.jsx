@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   PrincipalContainer,
   SaveButton,
@@ -11,7 +10,9 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase/config';
+import { auth, db } from '../firebase/config';
+import { doc, setDoc } from 'firebase/firestore';
+import localforage from 'localforage';
 
 const SingUpComponent = () => {
   const navigate = useNavigate();
@@ -32,24 +33,29 @@ const SingUpComponent = () => {
         const credential = GoogleAuthProvider.credentialFromError(error);
       });
 
-  const createUser = (e) => {
+  const createUser = async (e) => {
     e.preventDefault();
+    const dataUser = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    };
 
-    createUserWithEmailAndPassword(
-      auth,
-      e.target.email.value,
-      e.target.password.value
-    )
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+    try {
+      const user = await createUserWithEmailAndPassword(
+        auth,
+        dataUser.email,
+        dataUser.password
+      );
+      await setDoc(doc(db, 'users', user.user.uid), {
+        email: dataUser.email,
+        id: user.user.uid,
       });
-
-    console.log('sing up');
-    navigate('/');
+      localforage.setItem('userUID', user.user.uid);
+      navigate('/');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    }
   };
 
   return (

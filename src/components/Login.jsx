@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   PrincipalContainer,
   SaveButton,
@@ -12,6 +11,7 @@ import {
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/config';
+import localforage from 'localforage';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -40,11 +40,11 @@ const Login = () => {
       e.target.password.value
     )
       .then((userCredential) => {
+        localforage.setItem('userUID', userCredential.user.uid);
         navigate('/');
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log(errorCode);
       });
   };
 
