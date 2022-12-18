@@ -77,7 +77,9 @@ const UserComponent = () => {
             <label htmlFor=''>User Image</label>
             <input className='imgInput' type='file' name='img' />
           </div>
-          <SaveButton>Save</SaveButton>
+          <div className='btn'>
+            <SaveButton>Save</SaveButton>
+          </div>
         </form>
       </UserContainer>
     </PrincipalContainer>

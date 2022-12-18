@@ -61,10 +61,12 @@ const Login = () => {
             <label htmlFor=''>Password</label>
             <input type='password' name='password' />
           </div>
-          <SaveButton>Sing In</SaveButton>
-          <button type='button' onClick={signInGoogle}>
-            Google
-          </button>
+          <div className='btn'>
+            <SaveButton>Sing In</SaveButton>
+            <SaveButton type='button' onClick={signInGoogle}>
+              Google
+            </SaveButton>
+          </div>
         </form>
       </UserContainer>
     </PrincipalContainer>

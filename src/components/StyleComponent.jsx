@@ -343,7 +343,6 @@ export const UserContainer = styled.div`
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    justify-content: center;
   }
 
   @media ${device.mobileS} {
@@ -405,6 +404,12 @@ export const UserContainer = styled.div`
     .imgInput {
       border: none;
     }
+  }
+
+  .btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 

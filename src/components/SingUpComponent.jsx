@@ -71,10 +71,12 @@ const SingUpComponent = () => {
             <label htmlFor=''>Password</label>
             <input type='password' name='password' />
           </div>
-          <SaveButton>Sing Up</SaveButton>
-          <button type='button' onClick={signInGoogle}>
-            Google
-          </button>
+          <div className='btn'>
+            <SaveButton>Sing Up</SaveButton>
+            <SaveButton type='button' onClick={signInGoogle}>
+              Google
+            </SaveButton>
+          </div>
         </form>
       </UserContainer>
     </PrincipalContainer>
