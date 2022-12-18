@@ -18,20 +18,22 @@ const SingUpComponent = () => {
   const navigate = useNavigate();
   const provider = new GoogleAuthProvider();
 
-  const signInGoogle = () =>
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        navigate('/');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
+  const signInGoogle = async () => {
+    try {
+      const register = await signInWithPopup(auth, provider);
+      const user = register.user;
+      await setDoc(doc(db, 'users', user.uid), {
+        email: user.email,
+        id: user.uid,
       });
+      localforage.setItem('userUID', user.uid);
+      navigate('/');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.customData.email;
+    }
+  };
 
   const createUser = async (e) => {
     e.preventDefault();

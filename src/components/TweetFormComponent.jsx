@@ -62,8 +62,10 @@ const TweetFormComponent = () => {
         setTweet('');
       } catch (error) {
         setIsLoading(false);
+        console.log(error);
       }
     };
+
     getTweet();
   };
 

@@ -22,6 +22,7 @@ const Login = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
+        localforage.setItem('userUID', user.uid);
         navigate('/');
       })
       .catch((error) => {
